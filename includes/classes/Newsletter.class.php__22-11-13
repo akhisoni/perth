@@ -1,0 +1,115 @@
+<?php
+class Newsletter
+{
+
+	public $dbcon;
+	function __construct()
+	{
+		global $itfmysql;
+		$this->dbcon=$itfmysql;
+	}
+	//Add Data	
+	function admin_add($datas)
+	{
+		$this->dbcon->Insert(' itf_newsletter',$datas);
+	}
+	
+	//Delete Data
+	function admin_delete($UId)
+	{
+		$sql="delete from  itf_newsletter where id in(".$UId.")";
+		$this->dbcon->Query($sql);
+		return $this->dbcon->querycounter;
+	}
+
+        function admin_subscriber_delete($UId)
+        {
+            $sql="delete from  itf_subscriber where id in(".$UId.")";
+            $this->dbcon->Query($sql);
+            return $this->dbcon->querycounter;
+        }
+        
+
+	//Update Data
+
+	function admin_update($datas)
+	{
+		$condition = array('id'=>$datas['id']);
+		unset($datas['id']);
+		$this->dbcon->Modify(' itf_newsletter',$datas,$condition);
+	}
+
+
+	function ShowAllNewsletter()
+	{
+		$sql="select * from  itf_newsletter";
+		$datas=$this->dbcon->FetchAllResults($sql);
+	 	return $datas;
+	}
+
+    function ShowAllSubscribers()
+    {
+        $sql="select * from itf_subscriber";
+        $datas=$this->dbcon->FetchAllResults($sql);
+        return $datas;
+    }
+
+    function ShowAllSubscribersActive()
+    {
+        $sql="select * from itf_subscriber where status=1";
+        $datas=$this->dbcon->FetchAllResults($sql);
+        return $datas;
+    }
+
+
+	function GetPageData($id)
+	{
+		$sql="select * from  itf_newsletter  where id='".$id."'";
+		$datas=$this->dbcon->Query($sql);
+	 	return $datas;
+	}
+
+	function CheckNewsletter($UsId)
+	{
+		$sql="select * from  itf_newsletter where id='".$UsId."'";
+		return $this->dbcon->Query($sql);
+	}
+
+	
+
+	function PublishBlock($ids)
+	{	
+		$infos=$this->CheckPageCms($ids);
+		if($infos['status']=='1')
+			$datas=array('status'=>'0');
+		else
+			$datas=array('status'=>'1');
+		$condition = array('id'=>$ids);
+		$this->dbcon->Modify(' itf_newsletter',$datas,$condition);
+		return ($infos['status']=='1')?"0":"1";
+	}
+        
+        // Front Functions
+        
+        function add_member($email)
+	{
+            $datas = array('email'=>trim(strtolower($email))); 
+            $this->dbcon->Insert(' itf_subscriber',$datas);
+	}
+        
+        function checkSubscriber($email)
+        {
+            $sql="select * from  itf_subscriber where email='".trim($email)."'";
+            
+            $res = $this->dbcon->Query($sql);
+            
+            if($res){ 
+                
+                return false;            
+            } else{
+                
+                return true;
+            }
+        }
+}
+?>

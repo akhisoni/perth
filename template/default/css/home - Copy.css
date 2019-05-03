@@ -1,0 +1,530 @@
+/* Navbar Css */
+.navbar {
+    font-size: 14px;
+    background-color: black !important;
+    height: 55px;
+
+}
+
+/* Logo CSS */
+.logotop {
+
+    position: fixed;
+    z-index: 99;
+    padding-top: 50px;
+}
+
+
+/* Top Nav Search Bar */
+.navsearch {
+    padding-left: 20px;
+    padding-right: 30px;
+}
+
+.searchbardiv {
+    background-color: white;
+    border-radius: 4.5px;
+}
+
+.searchbar {
+    border-radius: 4.5px;
+    height: 25px;
+    width: 134px !important;
+    border: none;
+}
+
+
+.fa-search {
+    color: red;
+
+}
+
+.searchbtn {
+    border: none;
+    background-color: white;
+    border-radius: 4.5px;
+}
+
+
+.navbar a:hover {
+    background-color: red;
+    border-radius: 4.5px;
+}
+
+
+.h7 {
+    padding-left: 10px !important;
+}
+
+p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+body {
+    font-family: 'Helvetica';
+    font-weight: 500;
+    font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+    {
+    font-family: 'Helvetica', sans-serif;
+    font-weight: bold;
+}
+
+
+
+/* Carousel CSS */
+.carousel-caption {
+    font-size: 14px;
+    position: absolute;
+    right: 38%;
+    bottom: 91px;
+    /* left: 15%; */
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 85px;
+    color: #ed0000 !important;
+    text-align: left;
+}
+
+/* Section1 CSS */
+.section2 {
+
+
+    height: auto;
+    width: auto;
+    background-repeat: no-repeat;
+}
+
+.section2head {}
+
+.sechtion2text {
+
+    padding-top: 160px;
+    padding-left: 647px;
+
+}
+
+.sectionbody {
+    padding-bottom: 98px;
+}
+
+.section2btn {
+    border-radius: 3px;
+    background-color: #c30101;
+    width: 250px;
+}
+
+.section3 {
+    background-color: black;
+}
+
+
+
+.eventbutton {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+
+
+.viewmoreevent {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+
+
+.viewmoreclass {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.viewmorenews {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.viewmorealbum {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+
+
+.eventbtnarea {
+    height: 30px;
+    border-radius: 4.5px;
+    width: 180px;
+}
+
+.classsec {
+    background-color: black;
+}
+
+.gallreysec {
+    background-color: black;
+}
+
+
+
+.gallreydiv {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+
+
+.gallrey {
+    padding-bottom: 30px;
+}
+
+.musicalbum {
+    padding-bottom: 40px;
+
+}
+
+.img1 {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Upcoming Events */
+
+.eventimg {
+    padding: 10px;
+
+}
+
+.eventimgbg {
+    background-image: url(Img/bg_cream.png);
+}
+
+.card-img-top {
+    width: 100%;
+    border-top-left-radius: calc(.25rem - 1px);
+    border-top-right-radius: calc(.25rem - 1px);
+    height: 15vw;
+    object-fit: cover;
+}
+
+/*News Section */
+
+.newssection {
+    background-color: black;
+}
+
+.newscard {
+    background-color: bisque;
+}
+
+/* FULL Footer Css */
+.footer {
+    padding-top: 20px;
+    background-color: #c30101;
+}
+
+
+.card {
+    width: auto !important;
+
+
+}
+
+.card:hover {
+    color: red;
+}
+
+hr {
+    border: 0;
+    height: 20px;
+    background: url("../Img/hrline.png") 0 0;
+    background-repeat: no-repeat;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.hrwhite {
+    border: 0;
+    height: 100px;
+    background-image: url(../Img/hrline_white.png);
+    background-repeat: no-repeat;
+}
+
+.hrimg {
+    padding-bottom: 10px;
+}
+
+.announcement {
+    padding-top: 08px;
+    padding-bottom: 08px;
+}
+
+.hrline {
+
+    text-align: center;
+    margin: auto;
+    padding-left: 440px;
+
+}
+
+
+/*.img1 {
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
+    background-image: url("https://i.imgur.com/nLeQdrV.png");
+    background-position: center bottom, left top;
+  background-repeat: no-repeat;
+ 
+
+}*/
+
+.sectionhead3 {
+    padding-top: 25px;
+}
+
+/* Font awesome Icons */
+
+
+.fas {}
+
+.far.fa-calendar-alt,
+.fa-user-friends,
+.fa-clock,
+.fa-map-marker-alt {
+
+    color: red;
+}
+
+
+.fa-paper-plane {
+    color: white;
+}
+
+
+.fa-map-marker-alt {
+    color: white;
+}
+
+/* Mini Footer Css */
+
+
+.galdiv {
+    position: relative;
+    display: inline-block;
+}
+
+
+
+.text {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    font-family: sans-serif;
+}
+
+.overlayFade {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #ff946bbd;
+}
+
+.overlay {
+    position: absolute;
+    opacity: 0;
+    transition: all .3s ease;
+    background-color: #232121;
+    height: 50%;
+}
+
+.galdiv:hover .overlay,
+.galdiv:hover .overlayFade {
+    opacity: .5;
+}
+
+.overlayLeft {
+    height: 100%;
+    width: 0;
+    top: 0;
+    left: 0;
+    background-color: #00b1ba;
+}
+
+.overlayRight {
+    height: 100%;
+    width: 0;
+    top: 0;
+    right: 0;
+    background-color: #12888e;
+}
+
+.galdiv:hover .overlayLeft,
+.galdiv:hover .galdiv {
+    width: 100%;
+}
+
+.overlayTop {
+    width: 100%;
+    height: 0;
+    top: 0;
+    left: 0;
+    background-color: #d63c58;
+}
+
+.overlayBottom {
+    width: 100%;
+    height: 30% !important;
+    bottom: 0;
+    left: 0;
+    background-color: #941e33;
+
+}
+
+.galdiv:hover .overlayTop,
+.galdiv:hover .overlayBottom {
+    height: 100%;
+}
+
+.overlayCross {
+    width: 0%;
+    height: 0;
+    top: 0;
+    left: 0;
+    background-color: #e47a52;
+}
+
+.galdiv:hover .overlayCross {
+    height: 100%;
+    width: 100%;
+}
+
+
+.musiccard {
+    background: black;
+}
+
+.musicbtn {
+    width: 100%;
+    height: 35px;
+    border-radius: 6.5px;
+    border: solid 0.5px #ee2225;
+    background: transparent;
+
+}
+
+.musicbtndiv {
+    padding-top: 20px;
+}
+
+
+
+ul.footerlist {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+a {
+    color: white;
+}
+
+.input-group-addon {
+    color: #ff0000;
+    background-color: #0a0a0a !important;
+}
+
+.fa,
+.fas {
+    font-weight: 900;
+    padding-right: 5px;
+}
+
+.smicon {
+    padding-top: 10px;
+}
+
+i.fas.fa-paper-plane {
+    padding-left: 10px;
+    padding-top: 06px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+button.newslatterbtn {
+    background-color: black;
+}
+
+/* Example div css */
+
+@media screen and (max-width: 576px) {
+
+   h4, h5, h7 {
+    font-size: 12px;
+   }
+
+   p{
+    font-size: 10px;
+   }
+
+   .fas {
+    font-size: 10px;
+   }
+
+    .navbar {
+        font-size: 14px;
+        background-color: #d96969 !important;
+        height: auto;
+    }
+
+    .logotop {
+        position: fixed;
+        z-index: 99;
+        padding-top: 50px;
+    }
+
+    .card-img-top {
+        width: 100%;
+        border-top-left-radius: calc(.25rem - 1px);
+        border-top-right-radius: calc(.25rem - 1px);
+        height: 70vw;
+        object-fit: cover;
+    }
+
+    .top-right {
+        font-size: 10px;
+        position: absolute;
+        top: 8px !important;
+        right: 9px !important;
+    }
+
+    .top-right h4 {
+        font-size: 10px;
+    }
+
+
+    .top-right h6 {
+        font-size: 8px;
+    }
+
+    .top-right button {
+        font-size: 8px;
+    }
+
+    .top-right img {
+        width: 207px;
+        height: 25px;
+        padding-bottom: 1px;
+        padding-top: 0px;
+    }

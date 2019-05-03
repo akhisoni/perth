@@ -1,0 +1,41 @@
+<?php
+    $objCategory = new Category();
+    $objProduct = new Product();
+    
+    $categoryinfo = $objCategory->getAllCategoryFront();
+
+    $perpage = isset($siteinfo['front_paging_size'])?$siteinfo['front_paging_size']:'15' ;
+    $urlpath = CreateLink(array($currentpage))."&";
+    $InfoData1 = $objProduct->getLatestProduct();
+    $pagingobj = new ITFPagination($urlpath,$perpage);
+    $latestProducts = $pagingobj->setPaginateData($InfoData1);
+
+?>
+
+<div class="main_mat">
+<p><a href="<?php echo ITFPATH; ?>">Home</a> / <a href="<?php echo CreateLink(array('product')); ?>">Product</a></p>
+</div>
+    <div class="product_lft">
+    <h3>Category</h3>
+    <ul>
+        <?php foreach ($categoryinfo as $category){ ?>
+            <li><a href="<?php echo CreateLink(array('product','itemid'=>'catdetail&id='.$category['id'])); ?>"><?php echo $category['catname']; ?></a></li>
+        <?php } ?>
+    </ul>
+    </div>
+    <div class="product_rgt">
+        <div class="product_rgt_top">
+        <?php echo $pagingobj->Pages(); ?>
+        </div>
+        <div class="pro_cate">
+            <?php foreach ($latestProducts as $product){ ?>
+                <div class="pro_cate_cont"> <a href="<?php echo CreateLink(array('product','itemid'=>'detail&id='.$product['id'])); ?>"><img src="<?php echo PUBLICPATH."/products/".$product['main_image']; ?>" width="120px" height="122px" alt=""></a>
+                <p><?php echo $product['name']; ?></p>
+                </div>
+            <?php } ?>
+        
+            <div class="clear"></div>
+        </div>
+        
+
+    </div> 

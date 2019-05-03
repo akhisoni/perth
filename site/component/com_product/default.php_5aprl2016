@@ -1,0 +1,286 @@
+<?php
+$objProduct = new Product();
+$objCategory = new Category();
+$parent = isset($_GET['parent'])?$_GET['parent']: 0;
+$perpage = $stieinfo['front_paging_size'] ;
+$urlpath = CreateLink(array($currentpage,'parent'=>$parent))."&";
+
+if($_REQUEST['parent']){
+	
+	if(isset($_POST['sort']) && !empty($_POST['sort'])){
+$InfoData = $objCategory->getSortBySubCategory($_REQUEST['parent'],$_POST['sort']);
+
+}else{
+$InfoData = $objCategory->getCategories($parent);
+//$InfoData = $objCategory->getCategoriesAjaxloader($position,$item_per_page);
+}}
+
+	
+
+
+//$pagingobj = new ITFPagination($urlpath,$perpage);
+//$InfoData = $pagingobj->setPaginateData($InfoData1);
+//echo"<pre>"; print_r($InfoData); die;
+//$breadcrumb = $objCategory->getBreadcum($parent);
+$category = $objCategory->CheckCategory($parent);
+$itfMeta=array("title"=>$category["pagetitle"],"description"=>$category["pagemetatag"],"keyword"=>$category["pagekeywords"]);
+
+
+$sortorder = array('catname'=>'Name','id'=>'Newest');
+$sort = isset($_POST['sort'])?$_POST['sort']:'';
+
+$objcms = new PageCms();
+$cms= $objcms->GetPageData(13);
+
+$item_per_page = 24;
+
+$get_total_rows = 0;
+$results = mysql_query("SELECT COUNT(*) FROM itf_category");
+
+if($results){
+$get_total_rows = mysql_fetch_row($results);
+}
+
+//break total records into pages
+ $total_pages = ceil($get_total_rows[0]/$item_per_page);	
+
+?>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+	var track_click = 0; //track user click on "load more" button, righ now it is 0 click
+	
+	var total_pages = <?php echo $total_pages; ?>;
+
+   
+	$('#results').load("itf_ajax/fetch_pages.php", {'page':track_click}, function() {track_click++;}); //initial data to load
+
+	$(".load_more").click(function (e) { //user clicks on button
+	
+		$(this).hide(); //hide load more button on click
+		$('.animation_image').show(); //show loading image
+
+		if(track_click <= total_pages) //make sure user clicks are still less than total pages
+		{
+			//post page number and load returned data into result element
+			$.post('itf_ajax/fetch_pages.php',{'page': track_click}, function(data) {
+			
+				$(".load_more").show(); //bring back load more button
+				
+				$("#results").append(data); //append data received from server
+				
+				//scroll page to button element
+				$("html, body").animate({scroll: $("#load_more_button").offset().top}, 10000);
+				
+				//hide loading image
+				$('.animation_image').hide(); //hide loading image once data is received
+	
+				track_click++; //user click increment on load button
+			
+			}).fail(function(xhr, ajaxOptions, thrownError) { 
+				alert(thrownError); //alert any HTTP error
+				$(".load_more").show(); //bring back load more button
+				$('.animation_image').hide(); //hide loading image once data is received
+			});
+			
+			
+			if(track_click >= total_pages-1)
+			{
+				//reached end of the page yet? disable load button
+				$(".load_more").attr("disabled", "disabled");
+			}
+		 }
+		  
+		});
+});
+</script>
+<section class="section">
+<div class="center_main">
+<div class="home"><a href="<?php echo SITEURL; ?>">Home</a> / <a href="<?php echo CreateLink(array('product')); ?>"><span>Product</span></a><span><?php echo $breadcrumb; ?></span></div>
+  <?php include('category.php'); ?>
+
+<div class="main-about">
+<div class="about-one">
+<h1> Catalogues<br/> <img src="<?php echo TemplateUrl();?>image/line-sm.png"/></h1> 
+<?php echo $cms['logn_desc'];?>
+
+
+<div class="sort_by">
+<div class="sort_by_down">Sort By:
+<form id="frmsort" name="sort" method="post" action="">
+                
+                 <?php echo HTML::ComboBox('sort',$sortorder,$sort,array(),'Select'); ?>
+             </form>
+</div>
+<div class="page">
+<?php //echo $pagingobj->Pages(); ?>
+
+</div>
+</div>
+
+
+<?php if($_REQUEST['parent']){?>
+
+<div class="all_product">
+<?php foreach ($InfoData as $info){  ?>
+<div class="all_product_product">
+<ul>
+<li>
+<?php if(count($info['subcat']) > 0) { ?>
+<a href="<?php echo CreateLink(array('product','parent'=>$info['id'])); ?>">
+<?php if(!empty($info['image']) and file_exists(PUBLICFILE."categories/".$info['image'])) { ?>
+<img src="<?php echo PUBLICPATH."categories/".$info['image']; ?>" style="border:solid 4px #fff"; alt="" height="209px;" width="218px;"></a>
+<?php } else { ?>
+<img src="<?php echo PUBLICPATH."categories/noimage.jpg"; ?>" style="border:solid 4px #fff"; alt="" height="209px;" width="218px;"></a>
+<?php } ?>
+<?php } else { ?>
+<a href="<?php echo CreateLink(array('product','itemid'=>'catdetail','id'=>$info['id'])); ?>">
+<?php if(!empty($info['image']) and file_exists(PUBLICFILE."categories/".$info['image'])) { ?>
+<img src="<?php echo PUBLICPATH."categories/".$info['image']; ?>" style="border:solid 4px #fff"; alt="" height="209px;" width="218px;"></a>
+<?php } else { ?>
+<img src="<?php echo PUBLICPATH."categories/noimage.jpg"; ?>" style="border:solid 4px #fff"; alt="" height="209px;" width="218px;"></a>
+<?php } ?>
+<?php } ?>
+
+<h1><?php echo $info['catname']; ?></h1>                    
+<?php if(count($info['subcat']) > 0) { ?>
+<a href="<?php echo CreateLink(array('product','parent'=>$info['id'])); ?>">
+<input name="View Detail" type="button" value="View Detail" class="detail"></a>
+<?php } else { ?>
+<a href="<?php echo CreateLink(array('product','itemid'=>'catdetail','id'=>$info['id'])); ?>">
+<input name="View Detail" type="button" value="View Detail" class="detail"></a>
+<?php } ?>
+</li>
+</ul>
+</div>
+<?php } ?>
+</div>
+
+<?php 
+	
+	} else { ?>
+
+
+<div class="all_product" id="results">
+<?php /*?><?php foreach ($InfoData as $info){  ?>
+<div class="all_product_product">
+<ul>
+<li>
+<?php if(count($info['subcat']) > 0) { ?>
+<a href="<?php echo CreateLink(array('product','parent'=>$info['id'])); ?>">
+<?php if(!empty($info['image']) and file_exists(PUBLICFILE."categories/".$info['image'])) { ?>
+<img src="<?php echo PUBLICPATH."categories/".$info['image']; ?>" style="border:solid 4px #fff"; alt="" height="209px;" width="218px;"></a>
+<?php } else { ?>
+<img src="<?php echo PUBLICPATH."categories/noimage.jpg"; ?>" style="border:solid 4px #fff"; alt="" height="209px;" width="218px;"></a>
+<?php } ?>
+<?php } else { ?>
+<a href="<?php echo CreateLink(array('product','itemid'=>'catdetail','id'=>$info['id'])); ?>">
+<?php if(!empty($info['image']) and file_exists(PUBLICFILE."categories/".$info['image'])) { ?>
+<img src="<?php echo PUBLICPATH."categories/".$info['image']; ?>" style="border:solid 4px #fff"; alt="" height="209px;" width="218px;"></a>
+<?php } else { ?>
+<img src="<?php echo PUBLICPATH."categories/noimage.jpg"; ?>" style="border:solid 4px #fff"; alt="" height="209px;" width="218px;"></a>
+<?php } ?>
+<?php } ?>
+
+<h1><?php echo $info['catname']; ?></h1>                    
+<?php if(count($info['subcat']) > 0) { ?>
+<a href="<?php echo CreateLink(array('product','parent'=>$info['id'])); ?>">
+<input name="View Detail" type="button" value="View Detail" class="detail"></a>
+<?php } else { ?>
+<a href="<?php echo CreateLink(array('product','itemid'=>'catdetail','id'=>$info['id'])); ?>">
+<input name="View Detail" type="button" value="View Detail" class="detail"></a>
+<?php } ?>
+</li>
+</ul>
+</div>
+<?php } ?><?php */?>
+
+</div>
+<div align="center">
+<button class="load_more" id="load_more_button">View More Catalogues</button>
+<div class="animation_image" style="display:none;"><img src="<?php echo TemplateUrl();?>image/ajax-loader.gif"> Loading...</div>
+</div>
+<?php } ?>
+
+</div>
+</div>
+</div>
+</section>
+<script>
+    $(function(){
+
+        $('#sort').change(function() {
+            $('#frmsort').submit();
+        });
+
+    });
+</script>
+
+
+
+<style>
+#results{
+
+}
+#results .loading-indication{
+	background:#FFFFFF;
+	padding:10px;
+	position: absolute;
+}
+.paginate {
+	padding: 0px;
+	margin: 0px;
+	height: 30px;
+	display: block;
+	text-align: center;
+}
+.paginate li {
+	display: inline-block;
+	list-style: none;
+	padding: 0px;
+	margin-right: 1px;
+	width: 30px;
+	text-align: center;
+	background: #4CC2AF;
+	line-height: 25px;
+}
+.paginate .active {
+	display: inline-block;
+	list-style: none;
+	padding: 0px;
+	margin-right: 1px;
+	width: 30px;
+	text-align: center;
+	line-height: 25px;
+	background-color: #666666;
+}
+.paginate li a{
+	color:#FFFFFF;
+	text-decoration:none;
+}
+.page_result{
+	padding: 0px;
+}
+.page_result li{
+	background: #E4E4E4;
+	margin-bottom: 5px;
+	padding: 10px;
+	font-size: 12px;
+	list-style: none;
+}
+.page_result .page_name {
+font-size: 14px;
+font-weight: bold;
+margin-right: 5px;
+}
+.load_more {
+    background: #143e7e none repeat scroll 0 0;
+    border: medium none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 13px;
+    padding: 10px 20px;
+}
+</style>
+<script type="text/javascript" src="<?php //echo TemplateUrl();?>js/jquery-1.9.0.min.js"></script>

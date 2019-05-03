@@ -1,0 +1,25 @@
+<?php 
+$objcontents=new PageCms();
+if(isset($_POST["emailid"],$_POST["name"]))
+{
+	$objcontents->contactUs($_POST);
+	$gotolink=CreateLink(array("contents","itemid"=>"thanks"));
+	redirectUrl($gotolink);
+}
+$contentdata=$objcontents->GetArticales($data["itemid"]);
+$itfMeta=array("title"=>$contentdata["pagetitle"],"description"=>$contentdata["pagemetatag"],"keyword"=>$contentdata["pagekeywords"])
+?>
+<?php if(!empty($contentdata)) { ?>
+
+<div class="main_mat">
+    <p><a href="<?php echo ITFPATH; ?>">Home</a> / <a href=""><?php echo $contentdata["pagetitle"]; ?></a></p>
+</div>
+<div class="content_main">
+    <h3><?php echo $contentdata["pagetitle"]; ?></h3>
+    <?php echo $contentdata["logn_desc"]; ?>
+    <div class="clear"></div>
+</div>
+
+<?php } else { ?>
+    <div class="content_main" style="text-align: center;">No Page Found !</div>
+<?php } ?>
