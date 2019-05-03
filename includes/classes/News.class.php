@@ -296,5 +296,7 @@ $sql="SELECT count(*) FROM itf_customer_enquiry";
 	
 	return $datas;
 	}
+    
+    
 }
 ?>
