@@ -206,10 +206,7 @@ function limit_words($string, $word_limit) {
                             <div class="card-title"><?php echo $newslist1['pagetitle']; ?></div>
                            <div class="card-text"><?php echo limit_words($newslist1['description'], 30); ?></div>
                             <span class="clnewsdate"><i class="fas fa-clock text-muted"></i>
-                            <?php 
-                                $date = date($newslist1['entrydate'], strtotime('-22 hour'));
-echo $date;
-                                
+                            <?php  echo $newslist1['entrydate'];                              
                                 ?>
                             </span>
                         </div>
