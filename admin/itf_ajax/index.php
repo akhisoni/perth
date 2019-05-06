@@ -148,7 +148,13 @@ elseif(isset($_POST['itfpg']) and !empty($_POST['itfpg']))
 		echo $objactions->PublishBlock($_POST['flid']);
 	}
     
-     
+     elseif($_POST['itfpg']=="eventfeature")
+	{
+		$objactions = new Events();
+		echo $objactions->PublishFeatureBlock($_POST['flid']);
+	}
+    
+    
 	elseif($_POST['itfpg']=="newspage")
 	{
 		$objactions = new News();
