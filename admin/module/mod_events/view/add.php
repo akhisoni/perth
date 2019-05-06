@@ -81,8 +81,8 @@ $(document).ready(function() {
 
     var Validator = jQuery('#itffrminput').validate({
         rules: {           
-                pname: "required",
-				 price: "required",
+                event_name: "required",
+				 online_price: "required",
                 category_id:"required",
                 code: "required",
               //  logn_desc: "required"<?php if($ids==""){ ?>,
@@ -157,8 +157,18 @@ $(document).ready(function() {
     </div>
     
       <div class="element">
-        <label> Price <span class="red">(required)</span></label>
-       <input class="text"  name="price" type="number"  id="price" size="35" value="<?php echo isset($ItfInfoData['price'])?$ItfInfoData['price']:'' ?>" required="required"/>
+        <label> Online Price <span class="red">(required)</span></label>
+       <input class="text"  name="online_price" type="number"  id="online_price" size="35" value="<?php echo isset($ItfInfoData['online_price'])?$ItfInfoData['online_price']:'' ?>" required="required"/>
+  </div>
+    
+     <div class="element">
+        <label>Early Bird Price <span class="red">(required)</span></label>
+       <input class="text"  name="early_price" type="number"  id="early_price" size="35" value="<?php echo isset($ItfInfoData['early_price'])?$ItfInfoData['early_price']:'' ?>"/>
+  </div>
+    
+     <div class="element">
+        <label>Offline Price <span class="red">(required)</span></label>
+       <input class="text"  name="offline_price" type="number"  id="offline_price" size="35" value="<?php echo isset($ItfInfoData['offline_price'])?$ItfInfoData['offline_price']:'' ?>" />
   </div>
     
    <div class="element">
@@ -205,12 +215,24 @@ $(document).ready(function() {
  
         <label>Image </label>
  <div id="FileUpload">
-    <input type="file" size="24" id="main_image" name="main_image" class="BrowserHidden" onchange="getElementById('tmp_bannerimage').value = getElementById('bannerimage').value;" />
+    <input type="file" size="24" id="main_image" name="main_image" class="BrowserHidden text" onchange="getElementById('tmp_bannerimage').value = getElementById('bannerimage').value;" />
     <div id="BrowserVisible"><input type="hidden" id="tmp_bannerimage" class="FileField" /></div>
 </div>
 	      
       </div>
+    
+    <div class="element">
+ 
+        <label>Upload Event Pdf File in pdf format </label>
+ <div id="FileUpload">
+    <input type="file" size="24" id="pdf_upload" name="pdf_upload" class="BrowserHidden text" onchange="getElementById('pdf_upload').value = getElementById('pdf_upload').value;" /> <?php if($ItfInfoData['pdf_upload'])  { echo "<";}?>
+
+     <div id="pdf_upload"><input type="hidden" id="pdf_upload" class="FileField" /></div>
+</div>
+	      
+      </div>
    
+
 
     <!--<div class="element">
         <label>Catalogue Gallery Images<span class="blue">(one or more than one)</span> </label>
@@ -266,7 +288,7 @@ $(document).ready(function() {
         
           <div class="element">
         <label>Member Name</label>
-       <select name="seller_id" id="seller_id" required>
+       <select name="seller_id" id="seller_id">
       <option value="">--Select Member--</option>       
        <?php foreach($itfUserdata as $itfUser) {?>
        <option value="<?php echo $itfUser['id'];?>"<?php if($ItfInfoData["seller_id"] == $itfUser['id']){ echo"selected";} ?>><?php echo $itfUser['name'];?> (<?php echo $itfUser['company_name'];?>)</option>

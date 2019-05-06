@@ -1,5 +1,5 @@
 <?php 
-mb_internal_encoding("8bit");
+//mb_internal_encoding("8bit");
 $msgs="";
 require('../itfconfig.php');
 $currentpage = isset($_GET['itfpage']) ? $_GET['itfpage']:'login';

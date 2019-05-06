@@ -126,8 +126,9 @@ success:function(itfmsg){$("#categoryoption").html(itfmsg);}
               
               <th scope="col" width="10%">Image</th>
              <th scope="col" class="pro_name">Event Name</th>
-            <th scope="col">Price</th>
-            <th scope="col">Status</th>
+            <th scope="col">Online Price</th>
+            <th scope="col">Status (Active/Inactive)</th>
+           <th scope="col" width="20%">Featured (home page) (Active/Inactive)</th>
            
             <th scope="col" style="width: 65px;">Edit</th>
         </tr>
@@ -162,11 +163,13 @@ success:function(itfmsg){$("#categoryoption").html(itfmsg);}
                 <td class="align-left">
                   <span class="pname"><?php echo $InfoData[$i]['event_name']; ?></span>	</td>
                 <td class="align-left">
-                   <?php echo $InfoData[$i]['price']; ?>	</td>
+                   <?php echo $InfoData[$i]['online_price']; ?>	</td>
                 <td class="align-center">
                     <a href="#itf" class="activations" rel="<?php echo $InfoData[$i]['id']; ?>" rev="eventst"><img src="imgs/<?php echo $InfoData[$i]['status']; ?>.png" /></a>
                 </td>
-                
+                <td class="align-center">
+                    <a href="#itf" class="activations" rel="<?php echo $InfoData[$i]['id']; ?>" rev="eventfeature"><img src="imgs/<?php echo $InfoData[$i]['feature']; ?>.png" /></a>
+                </td>
                 <td class="align-center"><a href="<?php echo CreateLinkAdmin(array($currentpagenames,'actions'=>'edit','id'=>$InfoData[$i]['id'])); ?>" title="Edit" alt="Edit"><img src="img/i_edit.png" border="0" /></a>	  </td>
             </tr>
         <?php

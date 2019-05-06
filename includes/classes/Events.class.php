@@ -24,6 +24,19 @@ class Events
 			$productimagename=$objimage->createnames;
 			$datas['main_image']= $productimagename;
 		}
+        
+        
+        	if(isset($_FILES['pdf_upload']['name']) and !empty($_FILES['pdf_upload']['name']))
+		{
+			$fimgname="event_pdf_".time();
+			$objimage= new ITFUpload();
+			$objimage->load($_FILES['pdf_upload']);
+			//echo PUBLICFILE; die;
+			$objimage->save(PUBLICFILE."pdf_upload/".$fimgname);
+			$resumename=$objimage->GetFilename();
+			$datas['pdf_upload']=$resumename;
+		}
+        
 			unset($datas['id']);
 			return $this->dbcon->Insert('itf_events',$datas);
 	}
@@ -80,7 +93,9 @@ class Events
 
 	function admin_update($datas)
 	{
-$datas["slug"]= empty($datas["slug"])?Html::seoUrl($datas["event_name"]):Html::seoUrl($datas["slug"]);
+
+        $datas["slug"]= empty($datas["slug"])?Html::seoUrl($datas["event_name"]):Html::seoUrl($datas["slug"]);
+      
         if(isset($_FILES['main_image']['name']) and !empty($_FILES['main_image']['name']))
 		{
 			$fimgname="caproduct_".time();
@@ -93,6 +108,20 @@ $datas["slug"]= empty($datas["slug"])?Html::seoUrl($datas["event_name"]):Html::s
 			@unlink(PUBLICFILE."events/".$advertiseinfo["main_image"]);
 		}
 		
+        	if(isset($_FILES['pdf_upload']['name']) and !empty($_FILES['pdf_upload']['name']))
+		{
+			$fimgname="event_pdf_".time();
+			$objimage= new ITFUpload();
+			$objimage->load($_FILES['pdf_upload']);
+			//echo PUBLICFILE; die;
+			$objimage->save(PUBLICFILE."pdf_upload/".$fimgname);
+			$resumename=$objimage->GetFilename();
+            $datas['pdf_upload']=$resumename;
+            $advertiseinfo=$this->CheckProduct($datas['id']);
+			@unlink(PUBLICFILE."pdf_upload/".$advertiseinfo["pdf_upload"]);    
+		}
+        
+        
 		$condition = array('id'=>$datas['id']);
 
 		unset($datas['id']);
@@ -179,7 +208,7 @@ $datas["slug"]= empty($datas["slug"])?Html::seoUrl($datas["event_name"]):Html::s
 	
 		function ShowAllProductFrontend()
 	{
-		$sql="select * from itf_events where status=1";
+		$sql="select * from itf_events where status=1 and feature=1 order by id desc limit 0,4";
 		$datas=$this->dbcon->FetchAllResults($sql);
 	 	return $datas;
 	}
