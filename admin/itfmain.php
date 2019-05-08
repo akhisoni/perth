@@ -174,7 +174,13 @@ $(".box").children(".h_title").click( function() { $(this).next("ul").slideToggl
           <li class="b1"><a class="icon message" href="<?php echo CreateLinkAdmin(array('website_banner')); ?>">Home Slider</a></li>
         </ul>
       </div>
-      
+       
+       <div class="box">
+        <div class="h_title">&circleddash; Home Page Sections</div>
+        <ul class="homepage">
+          <li class="b1"><a class="icon message" href="<?php echo CreateLinkAdmin(array('homepage')); ?>">Home Page Sections</a></li>
+        </ul>
+      </div>
       <div class="box">
         <div class="h_title">&circleddash; Testimonial Management</div>
         <ul class="testimonial">
@@ -227,8 +233,8 @@ $(".box").children(".h_title").click( function() { $(this).next("ul").slideToggl
           <li class="b1"><a class="icon config" href="<?php echo CreateLinkAdmin(array('config')); ?>">Site Configuration</a></li>
           <li class="b1"><a class="icon profile" href="<?php echo CreateLinkAdmin(array('profile')); ?>">Profile Configuration</a></li>
           <li class="b1"><a class="icon password" href="<?php echo CreateLinkAdmin(array('password')); ?>">Change Password</a></li>
-          <li class="b1"><a class="icon city" href="<?php echo CreateLinkAdmin(array('state')); ?>">Manage Locations</a></li>
-          <!--  <li class="b1"><a class="icon city" href="<?php echo CreateLinkAdmin(array('program')); ?>">Paypal Details</a></li>-->
+<!--          <li class="b1"><a class="icon city" href="<?php echo CreateLinkAdmin(array('state')); ?>">Manage Locations</a></li>
+-->          <!--  <li class="b1"><a class="icon city" href="<?php echo CreateLinkAdmin(array('program')); ?>">Paypal Details</a></li>-->
         </ul>
       </div>
     </div>

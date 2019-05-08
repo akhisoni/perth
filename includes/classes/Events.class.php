@@ -12,9 +12,35 @@ class Events
 	
 	function admin_add($datas)
 	{
-		$datas["slug"]= empty($datas["slug"])?Html::seoUrl($datas["event_name"]):Html::seoUrl($datas["slug"]);
+
+        
+        $datas["slug"] = empty($datas["slug"])?Html::seoUrl($datas["event_name"]):Html::seoUrl($datas["slug"]);
        //  $datas['category_id'] = implode(",", $datas['category_id']);
-     
+        
+            $slugs =  $this->CheckEventByslug($datas["slug"]);
+       
+        if($slugs)
+        { 
+          $i = count($slugs['slug']);
+             $i=$i+1;
+            
+             $slugs['slug']; 
+               $datas["slug"] = $slugs['slug'].'-'.$i;
+                        
+                      
+                   }
+        	if(isset($_FILES['image']['name']) and !empty($_FILES['image']['name'])) 
+            {
+			$tot = count($_FILES["image"]["name"]); //To get total count of selected files.
+			$objimage= new ITFImageResize();
+                for($i=0; $i<$tot; $i++) {
+                 $fimgname="event_".time().$i;
+               $objimage->load($_FILES['image']['tmp_name'][$i]);   
+                $objimage->save(PUBLICFILE."event_images/".$fimgname);
+                 
+			$productimagename[] = $objimage->createnames;
+		$datas['image']= implode(',',$productimagename); 	
+			}}
 		if(isset($_FILES['main_image']['name']) and !empty($_FILES['main_image']['name']))
 		{
 			$fimgname="caproduct_".time();
@@ -96,6 +122,24 @@ class Events
 
         $datas["slug"]= empty($datas["slug"])?Html::seoUrl($datas["event_name"]):Html::seoUrl($datas["slug"]);
       
+      if($_FILES['image']['name'][0]){
+        
+        	if(isset($_FILES['image']['name']) and !empty($_FILES['image']['name'])) 
+            {
+                 
+			$tot = count($_FILES["image"]["name"]); //To get total count of selected files.
+			$objimage= new ITFImageResize();
+                for($i=0; $i<$tot; $i++) {
+                 $fimgname="event_".time().$i;
+               $objimage->load($_FILES['image']['tmp_name'][$i]);   
+                $objimage->save(PUBLICFILE."event_images/".$fimgname);
+                 
+			$productimagename[] = $objimage->createnames;
+		$datas['image']= implode(',',$productimagename); 	
+                    $advertiseinfo=$this->CheckProduct($datas['id']);
+			@unlink(PUBLICFILE."event_images/".$advertiseinfo["image"]);
+			}}}
+        
         if(isset($_FILES['main_image']['name']) and !empty($_FILES['main_image']['name']))
 		{
 			$fimgname="caproduct_".time();
@@ -212,6 +256,15 @@ class Events
 		$datas=$this->dbcon->FetchAllResults($sql);
 	 	return $datas;
 	}
+    
+    
+    
+		function ShowAllEventlist()
+	{
+		$sql="select * from itf_events where status=1 order by id desc";
+		$datas=$this->dbcon->FetchAllResults($sql);
+	 	return $datas;
+	}
 	
 		function ShowAllProductSeller()
 	{
@@ -277,7 +330,11 @@ class Events
         return $this->dbcon->Query($sql);
     }
     
-    
+    function CheckEventByslug($name)
+    {
+        $sql="select * from itf_events where slug='".$name."'";
+        return $this->dbcon->Query($sql);
+    }
     
     function CheckProductByCode($code)
     {

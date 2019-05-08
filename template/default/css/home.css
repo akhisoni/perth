@@ -650,3 +650,39 @@ h6.footerhead.text-center {font-weight: bold;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+
+/* ------------- date 6 may 2019 start ---------------------- */ 
+
+
+.about-right {
+            position: absolute;
+            top: 90px;
+            margin-left: 42%;
+            padding-top: 60px;
+        }
+
+        .about-right .h2 {
+            padding-top: 0px !important;
+        }
+
+        .btn-primary {
+            color: #000;
+            background-color: #ffffff;
+            border-color: #007bff;
+            border-radius: 6.5px;
+            border: solid 0.5px #707070;
+        }
+
+
+        .container.eventtypesection { 
+            padding-top: 22px;
+            padding-bottom: 22px;
+        }
+
+        
+
+        .card-deck.cardrow {
+            padding-bottom: 20px;
+        }
+/* ------------- date 6 may 2019 end ---------------------- */ 

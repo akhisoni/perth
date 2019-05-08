@@ -34,7 +34,8 @@ $InfoData=$pagingobj->setPaginateData($InfoData1);
          <thead>
     <tr>
       	<th width="4%" align="center"><input name="selectalls" id="selectalls" type="checkbox" value="0" /></th>
-      	<th width="57%" align="left">Banner Name </th>
+      	<th width="57%" align="left">Banner Title </th>
+        <th width="57%" align="left">Banner Description </th>
   		<th width="21%" align="center">Image</th>
         <th width="10%" align="center"  >Status</th>
   		<th width="9%"  align="center">Action</th>
@@ -48,7 +49,9 @@ $InfoData=$pagingobj->setPaginateData($InfoData1);
 	?>
     <tr class="<?php echo ($k%2==0)?"rowsfirst":"rowssec";?>" >
      <td align="left"><input name="itf_datasid[]" type="checkbox" value="<?php echo $itfdata['id']; ?>" class="itflistdatas" /></td>
-	   <td  align="left" ><?php echo $itfdata['name']; ?></td>   
+	  
+         <td  align="left" ><?php echo $itfdata['banner_title']; ?></td> 
+         <td  align="left" ><?php echo $itfdata['banner_desc']; ?></td> 
        <td align="left" class="imageview"><img src="<?php echo PUBLICPATH."website_banner/".$itfdata['imagename']; ?>" width="25" height="25"  /></td>
        <td align="center"><a href="#itf" class="activations" rel="<?php echo $itfdata['id']; ?>" rev="frmbanner1"><img src="imgs/<?php echo $itfdata['status']; ?>.png" /></a></td>
        <td align="center"><a href="<?php echo CreateLinkAdmin(array($currentpagenames,'actions'=>'edit','id'=>$itfdata['id'])); ?>" title="Edit Category " alt="Edit Category"><img src="imgs/itf_edit.png" border="0" /></a> </td>

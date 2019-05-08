@@ -45,7 +45,7 @@ function myFunction()
 		if(i < MaxFileInputs)
 			{
 
-		$('<div class="ffg"><div class="multifileblock"><div class="addmorefiles"><input type="file" id="fileInputBox" size="20" name="image[]" class="addedInput"/></div><div class="smalladdmore"><img src="<?php echo TemplateUrl();?>images/close.png" border="0" onclick="AddMoreImagesClose()" id="removeFileBox" /></div><div class="clear"></div></div></div>').appendTo(FileInputsHolder);
+		$('<div class="ffg"><div class="multifileblock"><div class="addmorefiles"><input type="file" id="fileInputBox" size="20" name="image[]" class="addedInput"/></div><div class="smalladdmore"><img src="imgs/delete.png" border="0" onclick="AddMoreImagesClose()" id="removeFileBox" /></div><div class="clear"></div></div></div>').appendTo(FileInputsHolder);
 				i++; }
 
 			return false;
@@ -87,7 +87,7 @@ $(document).ready(function() {
                 code: "required",
               //  logn_desc: "required"<?php if($ids==""){ ?>,
                 //main_image: "required"
-				  seller_id:"required"
+				 // seller_id:"required"
                 <?php } ?>
         },
         messages: {
@@ -211,7 +211,7 @@ $(document).ready(function() {
   </div>
  
  
-       <div class="element">
+       <!--<div class="element">
  
         <label>Image </label>
  <div id="FileUpload">
@@ -219,21 +219,42 @@ $(document).ready(function() {
     <div id="BrowserVisible"><input type="hidden" id="tmp_bannerimage" class="FileField" /></div>
 </div>
 	      
-      </div>
+      </div>-->
     
     <div class="element">
  
         <label>Upload Event Pdf File in pdf format </label>
  <div id="FileUpload">
-    <input type="file" size="24" id="pdf_upload" name="pdf_upload" class="BrowserHidden text" onchange="getElementById('pdf_upload').value = getElementById('pdf_upload').value;" /> <?php if($ItfInfoData['pdf_upload'])  { echo "<";}?>
+    <input type="file" size="24" id="pdf_upload" name="pdf_upload" class="BrowserHidden text" onchange="getElementById('pdf_upload').value = getElementById('pdf_upload').value;" /> <?php if($ItfInfoData['pdf_upload'])  { echo '<a href="'.PUBLICPATH."pdf_upload/".$ItfInfoData['pdf_upload'].'" download><span class="glyphicon glyphicon-download-alt" style="font-size:20px;color:#E14848"></span> Download Pdf</a>  ';}?>
 
      <div id="pdf_upload"><input type="hidden" id="pdf_upload" class="FileField" /></div>
 </div>
-	      
+	     
       </div>
-   
+   <div class="element">
+ <label>Upload Image (Multiple images up to 5 ) </label>
+ <div class="fieldset_box" id="AddFileInputBox">
+                <input type="file" name="image[]" id="image[]" value="" class="in-login">
+                <div class="fieldset_box" style="margin-bottom:0px;">
 
+		  	<label> &nbsp;</label>
+        <div class="more"><img src="imgs/addmore.png" id="moremenu_manish"  onclick="myFunction()" /> <span class="tip">(Maximum : 5 Files).</span></div>
+       
 
+        </div>
+        </div>
+    <?php
+       
+       $imge = explode(',',$ItfInfoData['image']);
+        if($imge[0]){
+       foreach($imge as $imgs)
+       {
+          ?>
+      <span><a href="<?php echo PUBLICPATH."event_images/".$imgs; ?>" downlaod><img class="zoomq" src="<?php echo PUBLICPATH."event_images/".$imgs; ?>" height="40" width="40"/> </a></span>  
+       <?php
+           
+       } }?>
+    </div>
     <!--<div class="element">
         <label>Catalogue Gallery Images<span class="blue">(one or more than one)</span> </label>
         <input class="text" name="image[]" type="file"  id="image" size="35" multiple />
@@ -311,7 +332,14 @@ $(document).ready(function() {
 
 
                
-            
+<style>.addmorefiles {
+    float: left;
+    margin-top: 10px;
+}.smalladdmore {
+    margin-top: 13px;
+    float: left;
+    margin-left: 10px;
+}</style> 
         
         <script type="text/javascript">
             $(function () {

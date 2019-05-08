@@ -68,7 +68,7 @@ class News
 	}
 	function ShowAllNewsFront()
 	{
-		$sql="select * from itf_news where status=1";
+		$sql="select * from itf_news where status=1 and feature=1 order by id desc limit 0,3";
 		$datas=$this->dbcon->FetchAllResults($sql);
 	 	return $datas;
 	}
@@ -101,6 +101,22 @@ class News
 		return ($infos['status']=='1')?"0":"1";
 	}
 
+    
+   
+function PublishFeatureBlock($ids)
+	{	
+		$infos=$this->CheckPageCms($ids);
+		if($infos['feature']=='1')
+			$datas=array('feature'=>'0');
+		else
+			$datas=array('feature'=>'1');
+		$condition = array('id'=>$ids);
+		$this->dbcon->Modify('itf_news',$datas,$condition);
+		return ($infos['feature']=='1')?"0":"1";
+	}
+
+
+    
 	function GetArticales($pagename)
 	{
 		$sql="select * from itf_news where name='".$pagename."'";

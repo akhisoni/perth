@@ -20,6 +20,15 @@ $eventlist = $events->ShowAllProductFrontend();
 $news = new News();
 $newslist = $news->ShowAllNewsFront();
 
+
+
+$site = new Site();
+$sites = $site->getHomePageDataSection(1);
+
+
+$user = new User();
+
+
 function limit_words($string, $word_limit) {
 	$string = strip_tags($string);
 	$words = explode(' ', strip_tags($string));
@@ -29,6 +38,8 @@ function limit_words($string, $word_limit) {
 	}
 	return $return;
 }
+
+
 ?>
 
 <section>
@@ -46,11 +57,11 @@ function limit_words($string, $word_limit) {
                 <div class="carousel-item <?php echo $bannerlist1['class']; ?>">
                     <img src="<?php echo PUBLICPATH."website_banner/".$bannerlist1['imagename']; ?>" class="d-block w-100" alt="...">
                     <div class="carousel-caption text-dark">
-                        <h3>Welcome to Perth Tango Society </h3>
+                        <h3><?php echo $bannerlist1['banner_title']; ?></h3>
                         <hr>
-                        <p>WE ORGANISE ARGENTINE TANGO EVENTS, FESTIVALS, CLASSES <br> AND WORKSHOPS IN PERTH</p>
+                        <p><?php echo wordwrap($bannerlist1['banner_desc'],55,"<br />\n");?></p>
                         <div class="eventbutton">
-                             <a href="#" class="section2btn">Event Calender</a>
+                             <a href="<?php echo $bannerlist1['url']; ?>" class="section2btn"><?php echo $bannerlist1['banner_button_title']; ?></a>
                             
                         </div>
                     </div>
@@ -71,16 +82,16 @@ function limit_words($string, $word_limit) {
     <!-- Section 1 Carousel Home End-->
     <!-- Section 2 Banner Start-->
     <div class="banner">
-        <img src="<?php echo TemplateUrl();?>images/sec2.png" alt="Snow" style="width:100%;">
+        <img src="<?php echo PUBLICPATH."home_about_banner/".$sites['b_image']; ?>" alt="Snow" style="width:100%;">
         <div class="bottom-left">
         </div>
         <div class="top-right">
             <div class="">
-                <h4 class="">LEADING TO THE DANCE OF HEART...</h4>
+                <h4 class=""><?php echo $sites['b_title'];?></h4>
                 <img class="hrimg" src="<?php echo TemplateUrl();?>images/hrline_white.png">
                 <div class="abouttext">
-                <h6>WE ORGANISE ARGENTINE TANGO EVENTS, FESTIVALS, <br />CLASSES AND WORKSHOPS IN PERTH</h6></div>
-                <a href="#" class="section2btn">Read more About Us</a>
+                <h6><?php echo wordwrap($sites['b_desc'],55,"<br />\n");?></h6></div>
+                <a href="<?php echo $sites['b_url'];?>" class="section2btn"><?php echo $sites['b_button'];?></a>
             </div>
         </div>
     </div>
@@ -88,8 +99,8 @@ function limit_words($string, $word_limit) {
     <!--  Anoucemnet Tabs Start -->
     <div class="">
         <div class="announcement bg-danger text-center text-white">
-            <p><i class="fas fa-bullhorn"></i>Join Tango Classes - “Come try!! You’re first class is free”</p>
-        </div>
+            <p><marquee><i class="fas fa-bullhorn"></i><?php echo $sites['b_marquee'];?></marquee></p>
+        </div> 
     </div>
     <!---- Anoucemnet Tabs End -->
     <!--------------------------  Upcoming Events  --------------------------->
@@ -104,15 +115,19 @@ function limit_words($string, $word_limit) {
             </div>
             <div class="container">
                 <div class="card-deck">
-                    <?php foreach($eventlist as $eventlist1){ ?>
+                    <?php foreach($eventlist as $eventlist1){ 
+                    $imge = explode(',',$eventlist1['image']);
+    		$username = $user->CheckProfileIDUser($eventlist1['seller_id']);
+
+                    ?>
                     <div class="card" style="box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.16);">
                         <div class="eventimg">
-                          <a href="#">  
-                              <img class="card-img-top" src="<?php echo PUBLICPATH."events/".$eventlist1['main_image']; ?>" alt="Card image cap" /></a>
+                          <a href="<?php echo CreateLink(array('events','itemid'=>'detail','name'=>$eventlist1['slug'])); ?>">  
+                              <img class="card-img-top" src="<?php echo PUBLICPATH."event_images/".$imge['0']; ?>" alt="Card image cap" /></a>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title"><a href="#"><?php echo $eventlist1['event_name']; ?></a></h5>
-                           <span><i class="fas fa-user-friends"></i><?php echo $eventlist1['event_name']; ?></span> 
+                            <h5 class="card-title"><a href="<?php echo CreateLink(array('events','itemid'=>'detail','name'=>$eventlist1['slug'])); ?>"><?php echo $eventlist1['event_name']; ?></a></h5>
+                           <span><i class="fas fa-user-friends"></i><?php echo $username['name']; ?></span> 
                             
                             <div class="row">
                                 <div class="col">
@@ -121,7 +136,7 @@ function limit_words($string, $word_limit) {
                                 <div class="col">
                                      <span><i class="fas fa-clock"></i><?php echo $eventlist1['start_time']; ?></span></div>
                             </div>
-                            <span><i class="fas fa-map-marker-alt"></i>211 <?php echo $eventlist1['address']; ?></span>
+                            <span><i class="fas fa-map-marker-alt"></i><?php echo $eventlist1['address']; ?></span>
                         </div>
                     </div>
                     <?php } ?>
@@ -132,7 +147,7 @@ function limit_words($string, $word_limit) {
                     
                 </div>
                 <div class="text-center viewmoreevent">
-                   <a href="#" class="section2btn">View More About Events</a>
+                   <a href="<?php echo CreateLink(array("events")); ?>" class="section2btn">View More About Events</a>
                 </div>
             </div>
         
@@ -215,7 +230,7 @@ function limit_words($string, $word_limit) {
                     <?php } ?>
                 </div>
                 <div class="text-center viewmorenews">
-                    <a href="#" class="section2btn">Past News & Articles</a>
+                    <a href="<?php echo CreateLink(array("news")); ?>" class="section2btn">Past News & Articles</a>
                 </div>
             </div>
         </div>

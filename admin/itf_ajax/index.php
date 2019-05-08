@@ -160,6 +160,12 @@ elseif(isset($_POST['itfpg']) and !empty($_POST['itfpg']))
 		$objactions = new News();
 		echo $objactions->PublishBlock($_POST['flid']);
 	}
+    
+	elseif($_POST['itfpg']=="featurenews")
+	{
+		$objactions = new News();
+		echo $objactions->PublishFeatureBlock($_POST['flid']);
+	}
 }
 
 ?>

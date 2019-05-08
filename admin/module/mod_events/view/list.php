@@ -141,8 +141,9 @@ success:function(itfmsg){$("#categoryoption").html(itfmsg);}
         if(count($InfoData) > 0){
         for($i=0;$i<count($InfoData);$i++)
         {
-			$imge = unserialize($InfoData[$i]['image']);
-			$getcat = $objcat->Get_Category($InfoData[$i]['category_id']);
+			$imge = explode(',',$InfoData[$i]['image']);
+			//print_r($imge[0]);
+            $getcat = $objcat->Get_Category($InfoData[$i]['category_id']);
 			$getcat1 = $objcat->Get_Category($InfoData[$i]['subcat_id']);
             ?>
             <tr>
@@ -153,8 +154,8 @@ success:function(itfmsg){$("#categoryoption").html(itfmsg);}
                <!--     <td class="align-left">
                    <?php echo $getcat['catname']; ?> >> <?php echo $getcat1['catname']; ?>	</td>-->
                  <td align="left">
-                    <?php if($InfoData[$i]['main_image']) { ?>
-                    <img class="zoomq" src="<?php echo PUBLICPATH."events/".$InfoData[$i]['main_image']; ?>" height="40" width="40"/>
+                    <?php if($imge[0]) { ?>
+                    <img class="zoomq" src="<?php echo PUBLICPATH."event_images/".$imge[0]; ?>" height="40" width="40"/>
                     <?php } else { ?>
                         <img src="<?php echo PUBLICPATH.'events/no_image.jpg'; ?>" height="40" width="40"/>
                     <?php } ?>

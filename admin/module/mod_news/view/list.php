@@ -33,17 +33,18 @@ $InfoData = $pagingobj->setPaginateData($InfoData1);
     <form id="itffrmlists" name="itffrmlists" method="post" action="">
         <input type="hidden" name="itfactions" id="itfactions" value="" />
         <input type="hidden" name="itf_status" id="itf_status" value="" />
-        <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+        <table id="example" class="table table-striped table-bordered dt-responsive" style="width:100%">
 
         <thead>
 
         <tr>
-            <th scope="col">&nbsp;<input name="selectalls" id="selectalls" type="checkbox" value="0" /></th>
-            <th scope="col">Name</th>
-            <th scope="col" width="10%">Image</th>
-            <th scope="col">Description</th>
-            <th scope="col">Status</th>
-            <th scope="col">Modify</th>
+            <th scope="col" width="5%">&nbsp;<input name="selectalls" id="selectalls" type="checkbox" value="0" /></th>
+            <th scope="col"  width="20%">Name</th>
+            <th scope="col"width="5%" >Image</th>
+            <th scope="col" width="25%">Description</th>
+            <th scope="col" width="5%">Status (Active/Inactive)</th>
+            <th scope="col"width="5%">Featured (home page) <br/>(Active/Inactive)</th>
+            <th scope="col" width="5%">Modify</th>
         </tr>
         </thead>
 
@@ -65,9 +66,12 @@ $InfoData = $pagingobj->setPaginateData($InfoData1);
                     <?php } ?>
                     </td>
                 <td class="align-left">
-                    <?php echo WordLimit($InfoData[$i]['description']); ?>		</td>
+                    <?php echo WordLimit($InfoData[$i]['description'], 10); ?>		</td>
                 <td class="align-center">
                     <a href="#itf" class="activations" rel="<?php echo $InfoData[$i]['id']; ?>" rev="newspage"><img src="imgs/<?php echo $InfoData[$i]['status']; ?>.png" /></a>
+                </td>
+                <td class="align-center">
+                    <a href="#itf" class="activations" rel="<?php echo $InfoData[$i]['id']; ?>" rev="featurenews"><img src="imgs/<?php echo $InfoData[$i]['feature']; ?>.png" /></a>
                 </td>
                 <td class="align-center"><a href="<?php echo CreateLinkAdmin(array($currentpagenames,'actions'=>'edit','id'=>$InfoData[$i]['id'])); ?>" title="Edit" alt="Edit"><img src="img/i_edit.png" border="0" /></a>	  </td>
             </tr>

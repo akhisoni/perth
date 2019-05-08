@@ -19,7 +19,7 @@ if($iLocal=="0")
 	define('MYSQLDB_PASS' , '');
 	define('MYSQLDB_DATABASE', 'perth_tango');
 	define('MYSQLDB_PORT' , 3306);
-	define('SITEURL','http://localhost:8081/perth_tango/');
+	define('SITEURL','http://localhost:8081/perth_tango');
     define('FCK_PATH','F:/xampp/htdocs/perth_tango/fck_files/');
 }
 

@@ -1,18 +1,20 @@
 <?php
 
-
+$site = new Site();
+$sites = $site->getHomePageDataSection(1);
 ?>
-
+<style>
+    .footer a:hover {color:#fff; text-decoration: none;}
+    .footer a {color:#cbd0d3; text-decoration: none;}
+</style>
 <footer>
     
     <div class="container-fluid footer">
         <div class="row text-white footer">
             <div class="col-sm-12">
             <div class="col-sm-3 footer-widget1">
-                <h6>PERTH TANGO SOCIETY</h6>
-                <p>The Perth Tango Society has been born to give our community of, Tango Dancers choices of venues, music and
-                    friendship with like minded people.Tango Dancers choices of venues, music and
-                    friendship with like minded people.</p>
+                <h6><?php echo $sites['footer_about_title'];?></h6>
+                <p><?php echo $sites['footer_about_desc'];?></p>
             </div>
             <div class="col-sm-3 footer-widget2">
                 <h6 class="footerhead text-center">Newsletter</h6>
@@ -48,19 +50,47 @@
             <div class="col-sm-3 footer-widget4">
                 <h6 class="text-white wd3text">Contact Us</h6>
                 <ul class="footerlist">
+                    <?php if($sites['footer_cont']) {?>
                     <li>
-                        <i class="fas fa-mobile-alt"></i>+61 414 493 088
+                        <i class="fas fa-mobile-alt"></i><a href="tel:<?php echo $sites['footer_cont'];?>"><?php echo $sites['footer_cont'];?> </a>
                     </li>
-                    <li><i class="fas fa-map-marker-alt"></i>24 Tenerife Boulevard, HILLARYS,
-                        Western Australia 6025</li>
-                    <li><i class="fas fa-envelope-open-text"></i>info@PerthTangoSociety.com.au</li>
+                  <?php }?>
+                    <?php if($sites['footer_add']) {?>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i><?php echo $sites['footer_add'];?>
+                    </li>
+                    <?php }?>
+                     <?php if($sites['footer_add2']) {?>
+                     <li>
+                         <i class="fas fa-map-marker-alt"></i><?php echo $sites['footer_add2'];?>
+                    </li>
+                     <?php }?>
+                    
+                    <?php if($sites['footer_email']) {?>
+                    <li><i class="fas fa-envelope-open-text"></i><a href="mailto:<?php echo $sites['footer_email'];?> "><?php echo $sites['footer_email'];?> </a>
+                    </li>
+                     <?php }?>
                 </ul>
                 <div class="container">
                     <ul class="list-inline text-white smicon">
-                        <li class="list-inline-item"><a href="#"><i class="fab fa-facebook" style="font-size: 25px;"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter" style="font-size: 25px;"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="fab fa-instagram" style="font-size: 25px;"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="fab fa-youtube" style="font-size: 25px;"></i></a></li>
+                        <?php if($sites['footer_fb']) {?>
+                        <li class="list-inline-item">
+                            <a href="<?php echo $sites['footer_fb'];?>"><i class="fab fa-facebook" style="font-size: 25px;"></i></a>
+                        </li>
+                         <?php }?> <?php if($sites['footer_twt']) {?>
+                        <li class="list-inline-item">
+                            <a href="<?php echo $sites['footer_twt'];?>"><i class="fab fa-twitter" style="font-size: 25px;"></i></a>
+                        </li><?php }?> <?php if($sites['footer_insta']) {?>
+                        <li class="list-inline-item">
+                            <a href="<?php echo $sites['footer_insta'];?>"><i class="fab fa-instagram" style="font-size: 25px;"></i></a>
+                        </li> <?php }?><?php if($sites['footer_youtube']) {?>
+                        <li class="list-inline-item">
+                            <a href="<?php echo $sites['footer_youtube'];?>"><i class="fab fa-youtube" style="font-size: 25px;"></i></a>
+                        </li><?php }?>
+                         <?php if($sites['footer_link']) {?>
+                          <li class="list-inline-item">
+                              <a href="<?php echo $sites['footer_link'];?>"><i class="fab fa-linkedin" style="font-size: 25px;"></i></a>
+                        </li><?php }?>
                     </ul>
                 </div>
             </div>

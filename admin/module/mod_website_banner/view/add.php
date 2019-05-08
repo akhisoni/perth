@@ -39,11 +39,17 @@ $(document).ready(function() {
         <img src="<?php echo PUBLICPATH."website_banner/".$InfoData['imagename']; ?>" width="225" height="225"  />   <?php }?>
  <div class="element">
 	<span class="req">&nbsp;</span>
-	<label>Banner Name <span>*</span></label>
-	<input class="text"  name="name" type="text"  id="name" size="35" value="<?php echo isset($InfoData['name'])?$InfoData['name']:'' ?>" />	
+	<label>Banner Title <span>*</span></label>
+	<input class="text"  name="banner_title" type="text"  id="banner_title" size="35" value="<?php echo isset($InfoData['banner_title'])?$InfoData['banner_title']:'' ?>" />	
 </div>
 
+ <div class="element">
+	<span class="req">&nbsp;</span>
+	<label> Banner Description </label>
+            <textarea class="textarea" name="banner_desc" type="text"  id="banner_desc"><?php echo isset($InfoData['banner_desc'])?$InfoData['banner_desc']:'' ?></textarea>
 
+</div>
+            
  <div class="element">
  <span class="req">&nbsp;</span>
 	<label>Banner Image <span>*</span></label>
@@ -59,6 +65,12 @@ $(document).ready(function() {
 	
 	<label>Banner URL <span>*</span></label>
 	<input class="text"  name="url" type="text"  id="name" size="35" value="<?php echo isset($InfoData['url'])?$InfoData['url']:'' ?>" />	
+</div>
+            
+             <div class="element">
+	
+	<label>Banner Button Name <span>*</span></label>
+	<input class="text"  name="banner_button_title" type="text"  id="banner_button_title" size="35" value="<?php echo isset($InfoData['banner_button_title'])?$InfoData['banner_button_title']:'' ?>" />	
 </div>
 <div class="entry">
 	<button type="submit">Submit</button>
